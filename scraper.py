@@ -35,20 +35,20 @@ def psp(url):
         href = span.get("href")
         url = f"https://www.psp.cz/sqw/{href}"
         urls.append(url)
-    print(urls)
     emails = []
     for url in urls:
         psp_detail_soup = soup(get(url))
         emails.append(psp_detail_soup.find_all("li", class_="mail")[0].text)
     print(emails)
-    save_to_csv(emails)
+    #save_to_csv(emails)
+    return emails
 def Main():
     psp_url = "https://www.psp.cz/sqw/hp.sqw?k=192"
-    psp(psp_url) 
+    emails = psp(psp_url)
+    return emails
     """
 Parse your things here from the soup object - suggest using things like find_all("a", class_="sister") / you can also use list ("a", ["stylelistrowone", "stylelistrow"])
 expected usage is soup(get("https://example.com")) and then anything you love.
 
 Scrape the world! 
 """
-Main()
